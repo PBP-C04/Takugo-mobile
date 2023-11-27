@@ -92,6 +92,9 @@ Berikut adalah langkah-langkah yang dilakukan untuk mengintegrasikan aplikasi de
 ## Berita Acara
 Berita acara kelompok kami dapat diakses di [sini](https://docs.google.com/spreadsheets/d/1KzU8pFon8oiifCXeRIm92SewEnetR6x-/edit?usp=sharing).
 
+## Desain Layout
+Desain layout kelompok kami dapat diakses di [sini](https://www.figma.com/file/iPq9GVvozilpFbLnNiI3KI/Wireframe-TK-PAS?type=design&node-id=0%3A1&mode=design&t=MFVE88CHYZKudu3B-1).
+
 ## 🗒️ Referensi 🗒️
 - Fabiola, A. (n.d.). Journaling Baik Bagi Kesehatan Mental? Direktorat Jenderal Kekayaan Negara. Retrieved October 10, 2023, from https://www.djkn.kemenkeu.go.id/kpknl-sidempuan/baca-artikel/15754/Journaling-Baik-Bagi-Kesehatan-Mental.html 
 - Sukma, N. (2022, June 4). Popularitas Otaku di Indonesia: Apakah Sekedar Budaya atau Ancaman Asing? Kompasiana.com. Retrieved October 10, 2023, from https://www.kompasiana.com/nyomanpryosattwikasukma4160/629ade14bb448678cf1a48c2/popularitas-otaku-di-indonesia-apakah-sekedar-budaya-atau-ancaman-asing
