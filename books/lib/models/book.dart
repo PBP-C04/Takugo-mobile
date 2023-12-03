@@ -4,9 +4,11 @@
 
 import 'dart:convert';
 
-List<Book> bookFromJson(String str) => List<Book>.from(json.decode(str).map((x) => Book.fromJson(x)));
+List<Book> bookFromJson(String str) =>
+    List<Book>.from(json.decode(str).map((x) => Book.fromJson(x)));
 
-String bookToJson(List<Book> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String bookToJson(List<Book> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Book {
   Model model;
@@ -20,16 +22,16 @@ class Book {
   });
 
   factory Book.fromJson(Map<String, dynamic> json) => Book(
-    model: modelValues.map[json["model"]]!,
-    pk: json["pk"],
-    fields: Fields.fromJson(json["fields"]),
-  );
+        model: modelValues.map[json["model"]]!,
+        pk: json["pk"],
+        fields: Fields.fromJson(json["fields"]),
+      );
 
   Map<String, dynamic> toJson() => {
-    "model": modelValues.reverse[model],
-    "pk": pk,
-    "fields": fields.toJson(),
-  };
+        "model": modelValues.reverse[model],
+        "pk": pk,
+        "fields": fields.toJson(),
+      };
 }
 
 class Fields {
@@ -48,30 +50,23 @@ class Fields {
   });
 
   factory Fields.fromJson(Map<String, dynamic> json) => Fields(
-    title: json["title"],
-    bookType: bookTypeValues.map[json["book_type"]]!,
-    volumes: json["volumes"],
-    imageUrl: json["image_url"],
-    score: json["score"]?.toDouble(),
-  );
+        title: json["title"],
+        bookType: bookTypeValues.map[json["book_type"]]!,
+        volumes: json["volumes"],
+        imageUrl: json["image_url"],
+        score: json["score"]?.toDouble(),
+      );
 
   Map<String, dynamic> toJson() => {
-    "title": title,
-    "book_type": bookTypeValues.reverse[bookType],
-    "volumes": volumes,
-    "image_url": imageUrl,
-    "score": score,
-  };
+        "title": title,
+        "book_type": bookTypeValues.reverse[bookType],
+        "volumes": volumes,
+        "image_url": imageUrl,
+        "score": score,
+      };
 }
 
-enum BookType {
-  DJS,
-  LNV,
-  MGA,
-  MHU,
-  MHW,
-  NVL
-}
+enum BookType { DJS, LNV, MGA, MHU, MHW, NVL }
 
 final bookTypeValues = EnumValues({
   "DJS": BookType.DJS,
@@ -82,13 +77,9 @@ final bookTypeValues = EnumValues({
   "NVL": BookType.NVL
 });
 
-enum Model {
-  BOOKS_BOOK
-}
+enum Model { BOOKS_BOOK }
 
-final modelValues = EnumValues({
-  "books.book": Model.BOOKS_BOOK
-});
+final modelValues = EnumValues({"books.book": Model.BOOKS_BOOK});
 
 class EnumValues<T> {
   Map<String, T> map;
