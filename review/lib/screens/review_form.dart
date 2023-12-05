@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:review/screens/menu.dart';
 
 class ReviewForm extends StatefulWidget {
   const ReviewForm({super.key});
@@ -11,8 +14,9 @@ class ReviewForm extends StatefulWidget {
 
 class _ReviewFormState extends State<ReviewForm> {
   final _formKey = GlobalKey<FormState>();
-  String comment = '';
-  int rating = 0;
+  String _name = '';
+  String _comment = '';
+  int _rating = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,7 @@ class _ReviewFormState extends State<ReviewForm> {
                   hintText: 'Enter your comment',
                 ),
                 onSaved: (String? value) {
-                  comment = value ?? '';
+                  _comment = value ?? '';
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
@@ -52,7 +56,7 @@ class _ReviewFormState extends State<ReviewForm> {
                 ),
                 keyboardType: TextInputType.number,
                 onSaved: (String? value) {
-                  rating = int.tryParse(value ?? '0') ?? 0;
+                  _rating = int.tryParse(value ?? '0') ?? 0;
                 },
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
@@ -67,14 +71,36 @@ class _ReviewFormState extends State<ReviewForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                      // Here you can add your logic to handle the review submission
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Processing Data')),
-                      );
-                    }
+
+                  onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                          // Kirim ke Django dan tunggu respons
+                          // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
+                          final response = await request.postJson(
+                          "https://takugo-c04-tk.pbp.cs.ui.ac.id/bookreview/add-review-flutter/",
+                          jsonEncode(<String, String>{
+                              'name': _name,
+                              'comment': _comment,
+                              'rating': _rating.toString()
+                              // TODO: Sesuaikan field data sesuai dengan aplikasimu
+                          }));
+                          if (response['status'] == 'success') {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                              content: Text("Produk baru berhasil disimpan!"),
+                              ));
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => ReviewHomePage()),
+                              );
+                          } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                  content:
+                                      Text("Terdapat kesalahan, silakan coba lagi."),
+                              ));
+                          }
+                      }
                   },
                   child: const Text('Submit'),
                 ),

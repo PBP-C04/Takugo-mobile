@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:review/screens/menu.dart';
 import 'package:takugo/widgets/drawer.dart'; // Ensure this path is correct
 import 'package:takugo/home/login.dart';
 
@@ -41,7 +42,10 @@ class MyHomePage extends StatelessWidget {
                 FeatureContainer(
                   title: 'Review Books',
                   icon: Icons.rate_review,
-                  onTap: () => navigateToLoginPage(context),// nanti diganti navigate sesuai modul
+                  onTap: () =>     Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ReviewHomePage()),
+                  ),// nanti diganti navigate sesuai modul
                 ),
                 FeatureContainer(
                   title: 'Book Journal',

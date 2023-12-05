@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:review/screens/menu.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -52,17 +53,17 @@ class LeftDrawer extends StatelessWidget {
          ListTile(
             title: const Text('Review Books'),
             // Bagian redirection ke ShopFormPage
-            // onTap: () {
-            //     /*
-            //     TODO: Buatlah routing ke ShopFormPage di sini,
-            //     setelah halaman ShopFormPage sudah dibuat.
-            //     */
-            //     Navigator.pushReplacement(
-            //         context,
-            //         MaterialPageRoute(
-            //             builder: (context) => ShopFormPage(),
-            //         ));
-            // },
+            onTap: () {
+                /*
+                TODO: Buatlah routing ke ShopFormPage di sini,
+                setelah halaman ShopFormPage sudah dibuat.
+                */
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ReviewHomePage(),
+                    ));
+            },
          ),
          ListTile(
           title: const Text('Book Journal'),
