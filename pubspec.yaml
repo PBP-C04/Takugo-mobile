@@ -38,7 +38,9 @@ dependencies:
   pbp_django_auth: ^0.4.0
   provider: ^6.1.1
   http: ^1.1.0
-  review:
+  books:
+    path: books
+  reviews:
     path: review
 
 dev_dependencies:
