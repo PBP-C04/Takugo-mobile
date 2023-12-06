@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:books/models/book.dart';
+import 'package:books/screens/book_detail.dart';
 
 class BookCard extends StatelessWidget {
   final Book book;
@@ -7,31 +8,23 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(book.fields.imageUrl);
     return Material(
         child: InkWell(
       onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const Placeholder()));
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => ViewBookDetail(book)));
       },
       child: Container(
           padding: const EdgeInsets.all(8),
-          // decoration: BoxDecoration(
-          //   color: Colors.amber,
-          //   image: DecorationImage(
-          //       image: NetworkImage(book.fields.imageUrl), fit: BoxFit.cover),
-          //   border: Border.all(width: 2),
-          // ),
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.network(
-                  book.fields.imageUrl,
-                  // height: 140,
-                  // width: 100,
-                ),
-                Text(book.fields.title, overflow: TextOverflow.fade)
+                Image.network(book.fields.imageUrl),
+                const SizedBox(height: 8),
+                Flexible(
+                    child: Text(book.fields.title,
+                        overflow: TextOverflow.ellipsis)),
               ],
             ),
           )),
