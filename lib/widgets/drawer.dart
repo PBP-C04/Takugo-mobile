@@ -1,4 +1,6 @@
+import 'package:books/screens/view_books.dart';
 import 'package:flutter/material.dart';
+import 'package:takugo/home/home.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -38,16 +40,27 @@ class LeftDrawer extends StatelessWidget {
             ),
           ),
           // TODO: Bagian routing
+           ListTile(
+            title: const Text('Home'),
+            // Bagian redirection ke MyHomePage
+            onTap: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => MyHomePage(),
+                    ));
+             },
+          ),
           ListTile(
             title: const Text('Buy Book'),
             // Bagian redirection ke MyHomePage
-            // onTap: () {
-            //     Navigator.pushReplacement(
-            //         context,
-            //         MaterialPageRoute(
-            //             builder: (context) => MyHomePage(),
-            //         ));
-            //  },
+            onTap: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ViewBooksPage(),
+                    ));
+             },
           ),
          ListTile(
             title: const Text('Review Books'),

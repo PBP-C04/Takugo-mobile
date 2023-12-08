@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:takugo/widgets/drawer.dart'; // Ensure this path is correct
+import 'package:takugo/widgets/drawer.dart'; 
 import 'package:takugo/home/login.dart';
+import 'package:books/screens/view_books.dart';
+import 'package:journal/screens/journal_form.dart';
 
 class MyHomePage extends StatelessWidget {
   @override
@@ -36,7 +38,11 @@ class MyHomePage extends StatelessWidget {
                 FeatureContainer(
                   title: 'Buy Book',
                   icon: Icons.book,
-                  onTap: () => navigateToLoginPage(context), // nanti diganti navigate sesuai modul
+                  onTap: () => 
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => ViewBooksPage()),
+                  ),
                 ),
                 FeatureContainer(
                   title: 'Review Books',
@@ -46,7 +52,11 @@ class MyHomePage extends StatelessWidget {
                 FeatureContainer(
                   title: 'Book Journal',
                   icon: Icons.bookmark,
-                  onTap: () => navigateToLoginPage(context), // nanti diganti navigate sesuai modul
+                  onTap: () => 
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => JournalFormPage()),
+                  ),
                 ),
                 FeatureContainer(
                   title: 'Donate Book',
