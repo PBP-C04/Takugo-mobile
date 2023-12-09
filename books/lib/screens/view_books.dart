@@ -18,8 +18,10 @@ class _ViewBooksPageState extends State<ViewBooksPage> {
   Future<List<Book>> fetchBook(CookieRequest request,
       {String filter = "none"}) async {
     final response =
-        await request.get("https://takugo-c04-tk.pbp.cs.ui.ac.id/books/api/book-list-flutter/");
+        await request.get("$url/books/api/book-list-flutter/?filter=$filter");
     // https://takugo-c04-tk.pbp.cs.ui.ac.id/books/api/book-list-flutter/
+    // http://127.0.0.1:8000/books/api/book-list-flutter/
+    // http://10.2.2.0:8000/books/api/book-list-flutter/
 
     // print(response);
     if (response['status']) {
@@ -60,6 +62,7 @@ class _ViewBooksPageState extends State<ViewBooksPage> {
               mainAxisSpacing: 10,
               crossAxisCount: 2,
               shrinkWrap: true,
+              childAspectRatio: 9 / 10,
               children: snapshot.data!.map((Book book) {
                 return BookCard(book);
               }).toList(),
