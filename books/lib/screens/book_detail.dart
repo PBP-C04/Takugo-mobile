@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:books/models/book.dart';
+import 'package:review/screens/review_home.dart';
 
 class ViewBookDetail extends StatelessWidget {
   final Book book;
-  const ViewBookDetail(this.book, {super.key});
+  const ViewBookDetail(this.book, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,14 @@ class ViewBookDetail extends StatelessWidget {
                 ElevatedButton(onPressed: () {}, child: const Text('Buy Book')),
                 const SizedBox(height: 10),
                 ElevatedButton(
-                    onPressed: () {}, child: const Text('Review Book')),
+                  onPressed: () {                    // Navigate to ReviewHomePage
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ReviewHomePage(bookId: book.pk)),
+                  );
+                },
+                child: const Text('Review Book'),
+                ),
                 const SizedBox(height: 10),
                 ElevatedButton(
                     onPressed: () {}, child: const Text('View Journal')),

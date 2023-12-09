@@ -43,14 +43,14 @@ class MyHomePage extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => const ViewBooksPage()),
                   ), // nanti diganti navigate sesuai modul
                 ),
-                FeatureContainer(
-                  title: 'Review Books',
-                  icon: Icons.rate_review,
-                  onTap: () =>     Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ReviewHomePage()),
-                  ),// nanti diganti navigate sesuai modul
-                ),
+                // FeatureContainer(
+                //   title: 'Review Books',
+                //   icon: Icons.rate_review,
+                //   // onTap: () =>     Navigator.push(
+                //   //   context,
+                //   //   MaterialPageRoute(builder: (context) => ReviewHomePage(bookId: book.pk)),
+                //   ),// nanti diganti navigate sesuai modul
+                // ),
                 FeatureContainer(
                   title: 'Book Journal',
                   icon: Icons.bookmark,

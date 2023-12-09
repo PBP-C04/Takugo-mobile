@@ -6,7 +6,9 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:review/screens/review_home.dart';
 
 class ReviewForm extends StatefulWidget {
-  const ReviewForm({super.key});
+  final int bookId;
+
+  const ReviewForm({Key? key, required this.bookId}) : super(key: key);
 
   @override
   State<ReviewForm> createState() => _ReviewFormState();
@@ -14,9 +16,8 @@ class ReviewForm extends StatefulWidget {
 
 class _ReviewFormState extends State<ReviewForm> {
   final _formKey = GlobalKey<FormState>();
-  final String _name = '';
-  String _comment = '';
-  int _rating = 0;
+    String _comment = '';
+    int _rating = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -71,36 +72,40 @@ class _ReviewFormState extends State<ReviewForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: ElevatedButton(
-
                   onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                          // Kirim ke Django dan tunggu respons
-                          // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-                          final response = await request.postJson(
-                          "https://takugo-c04-tk.pbp.cs.ui.ac.id/bookreview/add-review-flutter/",
-                          jsonEncode(<String, String>{
-                              'name': _name,
-                              'comment': _comment,
-                              'rating': _rating.toString()
-                              // TODO: Sesuaikan field data sesuai dengan aplikasimu
-                          }));
-                          if (response['status'] == 'success') {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                              content: Text("Produk baru berhasil disimpan!"),
-                              ));
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const ReviewHomePage()),
-                              );
-                          } else {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                  content:
-                                      Text("Terdapat kesalahan, silakan coba lagi."),
-                              ));
-                          }
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      final response = await request.postJson(
+                        "https://takugo-c04-tk.pbp.cs.ui.ac.id/bookreview/add-review-flutter/",
+                        jsonEncode(<String, dynamic>{
+                          'comment': _comment,
+                          'rating': _rating.toString(),
+                          'bookId': widget.bookId.toString(),
+                        }),
+                      );
+
+                      print('Response status: ${response.statusCode}');
+                      print('Response body: ${response.body}');
+                      if (response['status'] == 'success') {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Review added successfully!"),
+                          ),
+                        );
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ReviewHomePage(bookId: widget.bookId),
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Error, please try again."),
+                          ),
+                        );
                       }
+                    }
                   },
                   child: const Text('Submit'),
                 ),
