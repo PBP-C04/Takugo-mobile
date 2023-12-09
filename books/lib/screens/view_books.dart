@@ -18,7 +18,7 @@ class _ViewBooksPageState extends State<ViewBooksPage> {
   Future<List<Book>> fetchBook(CookieRequest request,
       {String filter = "none"}) async {
     final response =
-        await request.get("http://127.0.0.1:8000/books/api/book-list-flutter/");
+        await request.get("https://takugo-c04-tk.pbp.cs.ui.ac.id/books/api/book-list-flutter/");
     // https://takugo-c04-tk.pbp.cs.ui.ac.id/books/api/book-list-flutter/
 
     // print(response);

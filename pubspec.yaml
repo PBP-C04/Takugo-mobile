@@ -40,7 +40,7 @@ dependencies:
   http: ^1.1.0
   books:
     path: books
-  reviews:
+  review:
     path: review
 
 dev_dependencies:

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:review/screens/menu.dart';
+import 'package:review/screens/review_home.dart';
 
 class ReviewForm extends StatefulWidget {
   const ReviewForm({super.key});
@@ -14,7 +14,7 @@ class ReviewForm extends StatefulWidget {
 
 class _ReviewFormState extends State<ReviewForm> {
   final _formKey = GlobalKey<FormState>();
-  String _name = '';
+  final String _name = '';
   String _comment = '';
   int _rating = 0;
 
@@ -91,7 +91,7 @@ class _ReviewFormState extends State<ReviewForm> {
                               ));
                               Navigator.pushReplacement(
                                   context,
-                                  MaterialPageRoute(builder: (context) => ReviewHomePage()),
+                                  MaterialPageRoute(builder: (context) => const ReviewHomePage()),
                               );
                           } else {
                               ScaffoldMessenger.of(context)

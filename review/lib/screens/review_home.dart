@@ -5,10 +5,10 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ReviewHomePage extends StatefulWidget {
-  ReviewHomePage({Key? key}) : super(key: key);
+  const ReviewHomePage({Key? key}) : super(key: key);
 
   @override
-  _ReviewHomePageState createState() => _ReviewHomePageState();
+  State<ReviewHomePage> createState() => _ReviewHomePageState();
 }
 
 class _ReviewHomePageState extends State<ReviewHomePage> {
@@ -28,7 +28,7 @@ class _ReviewHomePageState extends State<ReviewHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Review'),
+        title: const Text('Book Review'),
       ),
       body: FutureBuilder<List<BookReview>>(
         future: fetchReviews(),
