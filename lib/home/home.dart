@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:takugo/widgets/drawer.dart'; 
+import 'package:takugo/widgets/drawer.dart'; // Ensure this path is correct
+import 'package:takugo/widgets/feature_container.dart';
 import 'package:takugo/home/login.dart';
 import 'package:books/screens/view_books.dart';
-import 'package:journal/screens/journal_form.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -18,119 +24,78 @@ class MyHomePage extends StatelessWidget {
         shadowColor: Colors.black, // Color of the shadow
       ),
       drawer: const LeftDrawer(), // Ensure this widget exists
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Otaku on The Go',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              'Inspiring the Manga and Comics Enthusiasts of Tomorrow',
-              style: TextStyle(fontSize: 16),
-            ),
-            // Menu buttons
-            Wrap(
-              spacing: 20, // horizontal spacing
-              runSpacing: 20, // vertical spacing
-              children: <Widget>[
-                FeatureContainer(
-                  title: 'Buy Book',
-                  icon: Icons.book,
-                  onTap: () => 
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => ViewBooksPage()),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 16, bottom: 8, left: 6, right: 6),
+                child: Text(
+                  'Otaku on The Go',
+                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Image.asset(
+                'assets/Takugo_Logo.png',
+                height: 200,
+                width: 200,
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 8, bottom: 16, left: 8, right: 8),
+                child: Text(
+                  'Inspiring the Manga and Comics Enthusiasts of Tomorrow',
+                  style: TextStyle(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(height: 10),
+              // Menu buttons
+              Wrap(
+                spacing: 20, // horizontal spacing
+                runSpacing: 20, // vertical spacing
+                children: <Widget>[
+                  FeatureContainer(
+                    title: 'View Books',
+                    icon: Icons.book,
+                    onTap: () => navigateToPage(context, const ViewBooksPage()),
                   ),
-                ),
-                FeatureContainer(
-                  title: 'Review Books',
-                  icon: Icons.rate_review,
-                  onTap: () => navigateToLoginPage(context),// nanti diganti navigate sesuai modul
-                ),
-                FeatureContainer(
-                  title: 'Book Journal',
-                  icon: Icons.bookmark,
-                  onTap: () => 
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => JournalFormPage()),
+                  FeatureContainer(
+                    title: 'Donate Book',
+                    icon: Icons.favorite,
+                    onTap: () {
+                      if (!request.loggedIn) {
+                        navigateToPage(context, const LoginPage());
+                      } else {
+                        navigateToPage(context, const Placeholder());
+                      }
+                    }, // nanti diganti navigate sesuai modul
                   ),
-                ),
-                FeatureContainer(
-                  title: 'Donate Book',
-                  icon: Icons.favorite,
-                  onTap: () => navigateToLoginPage(context), // nanti diganti navigate sesuai modul
-                ),
-                FeatureContainer(
-                  title: 'Forum Discussion',
-                  icon: Icons.forum,
-                  onTap: () => navigateToLoginPage(context), // nanti diganti navigate sesuai modul
-                ),
-              ],
-            ),
-          ],
+                  FeatureContainer(
+                    title: 'Forum Discussion',
+                    icon: Icons.forum,
+                    onTap: () {
+                      if (!request.loggedIn) {
+                        navigateToPage(context, const LoginPage());
+                      } else {
+                        navigateToPage(context, const Placeholder());
+                      }
+                    }, // nanti diganti navigate sesuai modul
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  void navigateToLoginPage(BuildContext context) {
+  void navigateToPage(BuildContext context, Widget page) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => LoginPage()),
-    );
-  }
-}
-
-class FeatureContainer extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  final VoidCallback onTap;
-
-  const FeatureContainer({
-    Key? key,
-    required this.title,
-    required this.icon,
-    required this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        width: 120,
-        height: 120,
-        decoration: BoxDecoration(
-          color: Colors.yellow[700],
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.3),
-              spreadRadius: 2,
-              blurRadius: 4,
-              offset: Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Icon(icon, size: 48.0),
-            SizedBox(height: 8),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
-      ),
+      MaterialPageRoute(builder: (context) => page),
     );
   }
 }

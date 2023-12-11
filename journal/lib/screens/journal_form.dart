@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:journal/models/book.dart';
+import 'package:journal/screens/detail_journal.dart';
 import 'package:provider/provider.dart';
+import 'package:books/models/book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'dart:convert';
 
-class JournalFormPage extends StatefulWidget {
-  const JournalFormPage({super.key});
+class JournalForm extends StatefulWidget {
+  final Book book;
+  final int id;
+  final String bookTitle;
 
+  const JournalForm({Key? key, required this.id, required this.bookTitle, required this.book}) : super(key: key);
   @override
-  State<JournalFormPage> createState() => _JournalFormPageState();
+  State<JournalForm> createState() => _JournalFormState();
 }
 
-class _JournalFormPageState extends State<JournalFormPage> {
+class _JournalFormState extends State<JournalForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String _notes = "";
@@ -28,11 +34,10 @@ class _JournalFormPageState extends State<JournalFormPage> {
                     'Add Journal',
                 ),
                 ),
-                backgroundColor: Colors.grey[900],
-                foregroundColor: Colors.white,
+                backgroundColor: Colors.yellow[700],
+                foregroundColor: Colors.black87,
             ),
             // TODO: Tambahkan drawer yang sudah dibuat di sini
-            drawer: const Drawer(),
             body: Form(
                 key: _formKey,
                 child: SingleChildScrollView(
@@ -44,6 +49,7 @@ class _JournalFormPageState extends State<JournalFormPage> {
                             child: TextFormField(
                                 decoration: InputDecoration(
                                 hintText: "Write your thoughts...",
+                                hintStyle: TextStyle(color: Colors.yellow[700],),
                                 labelText: "Notes",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5.0),
@@ -67,6 +73,7 @@ class _JournalFormPageState extends State<JournalFormPage> {
                             child: TextFormField(
                                 decoration: InputDecoration(
                                 hintText: "Write your favorite quotes...",
+                                hintStyle: TextStyle(color: Colors.yellow[700],),
                                 labelText: "Favorite Quotes",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5.0),
@@ -91,6 +98,7 @@ class _JournalFormPageState extends State<JournalFormPage> {
                             child: TextFormField(
                                 decoration: InputDecoration(
                                 hintText: "Rating (1-5)",
+                                hintStyle: TextStyle(color: Colors.yellow[700],),
                                 labelText: "Rating",
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5.0),
@@ -120,28 +128,29 @@ class _JournalFormPageState extends State<JournalFormPage> {
                                     child: ElevatedButton(
                                         style: ButtonStyle(
                                             backgroundColor:
-                                                MaterialStateProperty.all(Colors.green[900]),
+                                                MaterialStateProperty.all(Colors.yellow[700]),
                                         ),
                                         onPressed: () async {
                                             if (_formKey.currentState!.validate()) {
                                                 // Kirim ke Django dan tunggu respons
                                                 // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                                                 final response = await request.postJson(
-                                                "http://127.0.0.1:8000/add_journal_flutter/",
+                                                "http://127.0.0.1:8000/journal/add_journal_flutter/${widget.id}/",
                                                 jsonEncode(<String, String>{
                                                     'notes': _notes,
-                                                    'favorite-quotes': _favoriteQuotes,
+                                                    'favorite_quotes': _favoriteQuotes,
                                                     'rating': _rating.toString(),
+                                                    // 'bookId': widget.bookId.toString(),
                                                 }));
                                                 if (response['status'] == 'success') {
                                                     ScaffoldMessenger.of(context)
                                                         .showSnackBar(const SnackBar(
                                                     content: Text("Journal berhasil disimpan!"),
                                                     ));
-                                                    // Navigator.pushReplacement(
-                                                    //     context,
-                                                    //     MaterialPageRoute(builder: (context) => MyHomePage()),
-                                                    // );
+                                                    Navigator.pushReplacement(
+                                                        context,
+                                                        MaterialPageRoute(builder: (context) => JournalPage(id: widget.id, bookTitle: widget.bookTitle, book: widget.book)),
+                                                    );
                                                 } else {
                                                     ScaffoldMessenger.of(context)
                                                         .showSnackBar(const SnackBar(
@@ -153,7 +162,7 @@ class _JournalFormPageState extends State<JournalFormPage> {
                                         },
                                         child: const Text(
                                             "Save",
-                                            style: TextStyle(color: Colors.white),
+                                            style: TextStyle(color: Colors.black87),
                                         ),
                                     ),
                                 ),
