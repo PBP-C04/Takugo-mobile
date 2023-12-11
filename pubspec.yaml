@@ -42,6 +42,8 @@ dependencies:
     path: books
   journal:
     path: journal
+  review:
+    path: review
 
 dev_dependencies:
   flutter_test:

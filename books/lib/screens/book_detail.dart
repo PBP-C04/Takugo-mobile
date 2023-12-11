@@ -3,6 +3,7 @@ import 'package:books/models/book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:journal/screens/detail_journal.dart';
+import 'package:review/screens/review_home.dart';
 
 class ViewBookDetail extends StatelessWidget {
   final Book book;
@@ -75,7 +76,12 @@ class ViewBookDetail extends StatelessWidget {
                       height: 40,
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {                    // Navigate to ReviewHomePage
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ReviewHomePage(bookId: book.pk, bookTitle: book.fields.title, book: book,)),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.yellow[700],
                             foregroundColor: Colors.black87),
