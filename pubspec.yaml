@@ -40,6 +40,8 @@ dependencies:
   http: ^1.1.0
   books:
     path: books
+  review:
+    path: review
 
 dev_dependencies:
   flutter_test:
