@@ -23,7 +23,6 @@ class _ViewBooksPageState extends State<ViewBooksPage> {
     // http://127.0.0.1:8000/books/api/book-list-flutter/
     // http://10.2.2.0:8000/books/api/book-list-flutter/
 
-    // print(response);
     if (response['status']) {
       // print("hello");
       final data = jsonDecode(response['books']);
@@ -45,7 +44,7 @@ class _ViewBooksPageState extends State<ViewBooksPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('View Books'),
-        backgroundColor: Colors.grey[400],
+        backgroundColor: Colors.yellow[700],
         foregroundColor: Colors.black87,
       ),
       body: FutureBuilder(

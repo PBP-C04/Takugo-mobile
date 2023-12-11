@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:books/models/book.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -8,8 +9,9 @@ import 'package:review/screens/review_home.dart';
 class ReviewForm extends StatefulWidget {
   final String bookTitle;
   final int bookId;
+  final Book book;
 
-  const ReviewForm({Key? key, required this.bookId, required this.bookTitle}) : super(key: key);
+  const ReviewForm({Key? key, required this.bookId, required this.bookTitle, required this.book}) : super(key: key);
 
   @override
   State<ReviewForm> createState() => _ReviewFormState();
@@ -81,7 +83,7 @@ class _ReviewFormState extends State<ReviewForm> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     final response = await request.postJson(
-                      "http://127.0.0.1:8000/bookreview/add-review-flutter/",
+                      "https://takugo-c04-tk.pbp.cs.ui.ac.id/bookreview/add-review-flutter/",
                       jsonEncode(<String, dynamic>{
                         'comment': _comment,
                         'rating': _rating.toString(),
@@ -98,7 +100,7 @@ class _ReviewFormState extends State<ReviewForm> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ReviewHomePage(bookId: widget.bookId, bookTitle: widget.bookTitle,),
+                          builder: (context) => ReviewHomePage(bookId: widget.bookId, bookTitle: widget.bookTitle, book: widget.book),
                         ),
                       );
                     } else {
