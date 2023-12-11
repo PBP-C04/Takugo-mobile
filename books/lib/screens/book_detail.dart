@@ -75,7 +75,7 @@ class ViewBookDetail extends StatelessWidget {
                       height: 40,
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {                    // Navigate to ReviewHomePage
+                        onPressed: () async {                    // Navigate to ReviewHomePage
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => ReviewHomePage(bookId: book.pk, bookTitle: book.fields.title, book: book,)),

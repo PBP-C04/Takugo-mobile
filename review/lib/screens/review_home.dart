@@ -1,5 +1,6 @@
 import 'package:books/models/book.dart';
 import 'package:books/screens/book_detail.dart';
+import 'package:books/screens/view_books.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -64,7 +65,7 @@ class _ReviewHomePageState extends State<ReviewHomePage> {
           icon: Icon(Icons.arrow_back),
           onPressed: () {
           Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => ViewBookDetail(widget.book)));
+              MaterialPageRoute(builder: (context) => const ViewBooksPage()));
           },
         ),
       ),
