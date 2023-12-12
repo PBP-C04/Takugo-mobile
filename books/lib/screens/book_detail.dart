@@ -1,3 +1,4 @@
+import 'package:books/widgets/buy_book.dart';
 import 'package:flutter/material.dart';
 import 'package:books/models/book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -7,18 +8,6 @@ import 'package:review/screens/review_home.dart';
 class ViewBookDetail extends StatelessWidget {
   final Book book;
   const ViewBookDetail(this.book, {super.key});
-
-  Future<String> buyBook(CookieRequest request, int amount) async {
-    final resp = await request.post(
-        'https://takugo-c04-tk.pbp.cs.ui.ac.id/books/buy-book-flutter/${book.pk}/',
-        {'amount': amount});
-
-    if (resp['status']) {
-      return resp['message'];
-    } else {
-      return "Failed to buy book: ${resp['message']}";
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +44,38 @@ class ViewBookDetail extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () async {
-                          // TODO: Add popup to buy book
-                          String msg = await buyBook(request, 0);
-                          ScaffoldMessenger.of(context)
-                            ..hideCurrentSnackBar()
-                            ..showSnackBar(SnackBar(content: Text(msg)));
+                          Map<String, dynamic>? msg =
+                              await showDialog<Map<String, dynamic>>(
+                                  context: context,
+                                  builder: (context) => BuyBookDialog(book));
+
+                          if (context.mounted) {
+                            if (msg!['status']) {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                          title: const Text('Success!'),
+                                          content: Text(msg['message']),
+                                          actions: [
+                                            TextButton(
+                                                child: const Text('Ok'),
+                                                onPressed: () =>
+                                                    Navigator.of(context).pop())
+                                          ]));
+                            } else {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                          title: const Text('Failed!'),
+                                          content: Text(msg['message']),
+                                          actions: [
+                                            TextButton(
+                                                child: const Text('Ok'),
+                                                onPressed: () =>
+                                                    Navigator.of(context).pop())
+                                          ]));
+                            }
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.yellow[700],
