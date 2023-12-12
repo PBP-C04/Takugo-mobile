@@ -11,7 +11,7 @@ void main() {
 
 enum UserType {
   none('Choose user type', ''),
-  regular('Regular User', 'R'),
+  regular('Regular User', 'U'),
   institution('Institution', 'I');
 
   const UserType(this.label, this.value);
@@ -42,8 +42,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final String url = 'https://takugo-c04-tk.pbp.cs.ui.ac.id/auth/register/';
-  String userType = 'R';
+  final String url = 'http://10.0.2.2:8000/auth/register/';
+  String userType = '';
 
   @override
   Widget build(BuildContext context) {
@@ -117,12 +117,33 @@ class _RegisterPageState extends State<RegisterPage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () async {
+                    if (userType.isEmpty) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('User Type Cannot be Empty'),
+                          content: const Text(
+                              'Please choose what type of user your account is.'),
+                          actions: [
+                            TextButton(
+                              child: const Text('OK'),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                      return;
+                    }
+
                     String username = _usernameController.text;
                     String password = _passwordController.text;
 
                     final response = await request.post(url, {
                       'username': username,
                       'password': password,
+                      'user_type': userType,
                     });
 
                     if (response['status']) {
