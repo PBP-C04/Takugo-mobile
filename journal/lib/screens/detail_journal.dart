@@ -18,49 +18,23 @@ class JournalPage extends StatefulWidget {
     _JournalPageState createState() => _JournalPageState();
 }
 
-// class _JournalPageState extends State<JournalPage> {
-//   Future<List<Item>> fetchProduct(CookieRequest request) async {
-//     final response = await request.get(
-//         'https://takugo-c04-tk.pbp.cs.ui.ac.id/journal/get_journal_json/${widget.id}/');
-
-//     if (response['status']) {
-//       var data = jsonDecode(utf8.decode(response.bodyBytes));
-//       List<Item> items = [];
-//       for (var item in data) {
-//         items.add(Item.fromJson(item));
-//       }
-//       return items;
-//     } else {
-//       throw Exception("Failed to fetch journal list");
-//     }
-//   }
 class _JournalPageState extends State<JournalPage> {
-Future<List<Item>> fetchProduct() async {
-    // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-    var url = Uri.parse(
-        'http://127.0.0.1:8000/journal/get_journal_json/${widget.id}/');
-    var response = await http.get(
-        url,
-        headers: {"Content-Type": "application/json"},
-    );
+  Future<List<Item>> fetchProduct() async {
+    final request = context.watch<CookieRequest>();
+    var response = await request.get(
+        'https://takugo-c04-tk.pbp.cs.ui.ac.id/journal/get_journal_json/${widget.id}/');
 
-    // melakukan decode response menjadi bentuk json
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
-
-    // melakukan konversi data json menjadi object Product
-    List<Item> list_item = [];
-    for (var d in data) {
-        if (d != null) {
-            list_item.add(Item.fromJson(d));
-        }
+    String data = jsonEncode(response);
+    if (response != null) {
+      final list_item = itemFromJson(data);
+      return list_item;
+    } else {
+      throw Exception("Failed to fetch journal list");
     }
-    return list_item;
-}
+  }
 
 @override
 Widget build(BuildContext context) {
-  // final request = context.watch<CookieRequest>();
-
   return Scaffold(
     appBar: AppBar(
       title: Text('Journal for: ${widget.bookTitle}'),
