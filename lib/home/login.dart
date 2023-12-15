@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:takugo/home/register.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:takugo/home/home.dart';
-import 'package:takugo/home/register.dart';
 import 'package:takugo/widgets/drawer.dart';
 
 void main() {
@@ -115,6 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                   // gunakan URL http://10.0.2.2/
                   final response =
                       await request.login("https://takugo-c04-tk.pbp.cs.ui.ac.id/auth/login/", {
+                      // await request.login("http://127.0.0.1:8000/auth/login/", {
                     'username': username,
                     'password': password,
                   });
