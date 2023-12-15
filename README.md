@@ -1,5 +1,10 @@
 # Takugo (Otaku on the Go)
 
+[![Dev](https://github.com/PBP-C04/Takugo-mobile/actions/workflows/dev.yml/badge.svg)](https://github.com/PBP-C04/Takugo-mobile/actions/workflows/dev.yml)
+[![Pre-Release](https://github.com/PBP-C04/Takugo-mobile/actions/workflows/pre-release.yml/badge.svg)](https://github.com/PBP-C04/Takugo-mobile/actions/workflows/pre-release.yml)
+[![Release](https://github.com/PBP-C04/Takugo-mobile/actions/workflows/release.yml/badge.svg)](https://github.com/PBP-C04/Takugo-mobile/actions/workflows/release.yml)
+[![MS App Center Build](https://build.appcenter.ms/v0.1/apps/89a2bc6d-6246-4d4a-a552-f2e8360bd4ec/branches/main/badge)](https://appcenter.ms)
+
 - [Anggota](#-anggota-kelompok-c04-)
 - [Pembagian Tugas](#-pembagian-tugas-modul-)
 - [Latar Belakang](#-latar-belakang-takugo-)
@@ -91,6 +96,9 @@ Berikut adalah langkah-langkah yang dilakukan untuk mengintegrasikan aplikasi de
 
 ## Berita Acara
 Berita acara kelompok kami dapat diakses di [sini](https://docs.google.com/spreadsheets/d/1KzU8pFon8oiifCXeRIm92SewEnetR6x-/edit?usp=sharing).
+
+## Desain Layout
+Desain layout kelompok kami dapat diakses di [sini](https://www.figma.com/file/iPq9GVvozilpFbLnNiI3KI/Wireframe-TK-PAS?type=design&node-id=0%3A1&mode=design&t=MFVE88CHYZKudu3B-1).
 
 ## 🗒️ Referensi 🗒️
 - Fabiola, A. (n.d.). Journaling Baik Bagi Kesehatan Mental? Direktorat Jenderal Kekayaan Negara. Retrieved October 10, 2023, from https://www.djkn.kemenkeu.go.id/kpknl-sidempuan/baca-artikel/15754/Journaling-Baik-Bagi-Kesehatan-Mental.html 
