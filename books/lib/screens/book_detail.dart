@@ -1,8 +1,6 @@
 import 'package:books/widgets/buy_book.dart';
 import 'package:flutter/material.dart';
 import 'package:books/models/book.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
 import 'package:review/screens/review_home.dart';
 
 class ViewBookDetail extends StatelessWidget {
@@ -11,8 +9,6 @@ class ViewBookDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
-
     return Scaffold(
         appBar: AppBar(
             title: Text(book.fields.title),
