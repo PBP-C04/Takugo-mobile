@@ -1,4 +1,4 @@
-package com.example.takugo
+package com.c04.takugo
 
 import io.flutter.embedding.android.FlutterActivity
 
