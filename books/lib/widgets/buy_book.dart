@@ -29,11 +29,10 @@ class _BuyBookDialogState extends State<BuyBookDialog> {
 
     return AlertDialog(
       scrollable: true,
-      title: Flexible(
-          child: Text(
+      title: Text(
         'Buy ${widget.book.fields.title}?',
         overflow: TextOverflow.ellipsis,
-      )),
+      ),
       content: TextField(
         controller: _amount,
         decoration: InputDecoration(
