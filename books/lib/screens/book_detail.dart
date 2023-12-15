@@ -5,11 +5,13 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:journal/screens/detail_journal.dart';
 import 'package:review/screens/review_home.dart';
+import 'package:takugo/home/login.dart';
+import 'package:takugo/home/register.dart';
 
 class ViewBookDetail extends StatelessWidget {
   final Book book;
   const ViewBookDetail(this.book, {super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
@@ -113,10 +115,18 @@ class ViewBookDetail extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => JournalPage(id: book.pk, bookTitle: book.fields.title, book: book))
-                          );
+                          if (request.loggedIn) {
+                             Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => JournalPage(id: book.pk, bookTitle: book.fields.title, book: book))
+                              );
+                          } 
+                          else {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => LoginPage())
+                              );
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.yellow[700],

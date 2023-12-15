@@ -42,7 +42,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final String url = 'http://10.0.2.2:8000/auth/register/';
+  final String url = 'https://takugo-c04-tk.pbp.cs.ui.ac.id/auth/register/';
   String userType = '';
 
   @override
