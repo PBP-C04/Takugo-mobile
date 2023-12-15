@@ -1,8 +1,6 @@
 import 'package:books/widgets/buy_book.dart';
 import 'package:flutter/material.dart';
 import 'package:books/models/book.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
 
 class ViewBookDetail extends StatelessWidget {
   final Book book;
@@ -10,8 +8,6 @@ class ViewBookDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
-
     return Scaffold(
         appBar: AppBar(
             title: Text(book.fields.title),
@@ -28,7 +24,8 @@ class ViewBookDetail extends StatelessWidget {
                 const SizedBox(height: 10),
                 Text(book.fields.title,
                     style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold)),
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center),
                 const SizedBox(height: 10),
                 Text('Score: ${book.fields.score}',
                     style: const TextStyle(fontSize: 16)),
@@ -49,30 +46,34 @@ class ViewBookDetail extends StatelessWidget {
                                   builder: (context) => BuyBookDialog(book));
 
                           if (context.mounted) {
-                            if (msg!['status']) {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                          title: const Text('Success!'),
-                                          content: Text(msg['message']),
-                                          actions: [
-                                            TextButton(
-                                                child: const Text('Ok'),
-                                                onPressed: () =>
-                                                    Navigator.of(context).pop())
-                                          ]));
-                            } else {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                          title: const Text('Failed!'),
-                                          content: Text(msg['message']),
-                                          actions: [
-                                            TextButton(
-                                                child: const Text('Ok'),
-                                                onPressed: () =>
-                                                    Navigator.of(context).pop())
-                                          ]));
+                            if (msg != null) {
+                              if (msg['status']) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                            title: const Text('Success!'),
+                                            content: Text(msg['message']),
+                                            actions: [
+                                              TextButton(
+                                                  child: const Text('Ok'),
+                                                  onPressed: () =>
+                                                      Navigator.of(context)
+                                                          .pop())
+                                            ]));
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                            title: const Text('Failed!'),
+                                            content: Text(msg['message']),
+                                            actions: [
+                                              TextButton(
+                                                  child: const Text('Ok'),
+                                                  onPressed: () =>
+                                                      Navigator.of(context)
+                                                          .pop())
+                                            ]));
+                              }
                             }
                           }
                         },
