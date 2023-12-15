@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:books/models/book.dart';
 import 'package:review/screens/review_home.dart';
 
+
 class ViewBookDetail extends StatelessWidget {
   final Book book;
   const ViewBookDetail(this.book, {super.key});
@@ -25,7 +26,8 @@ class ViewBookDetail extends StatelessWidget {
                 const SizedBox(height: 10),
                 Text(book.fields.title,
                     style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold)),
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center),
                 const SizedBox(height: 10),
                 Text('Score: ${book.fields.score}',
                     style: const TextStyle(fontSize: 16)),
@@ -46,30 +48,34 @@ class ViewBookDetail extends StatelessWidget {
                                   builder: (context) => BuyBookDialog(book));
 
                           if (context.mounted) {
-                            if (msg!['status']) {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                          title: const Text('Success!'),
-                                          content: Text(msg['message']),
-                                          actions: [
-                                            TextButton(
-                                                child: const Text('Ok'),
-                                                onPressed: () =>
-                                                    Navigator.of(context).pop())
-                                          ]));
-                            } else {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                          title: const Text('Failed!'),
-                                          content: Text(msg['message']),
-                                          actions: [
-                                            TextButton(
-                                                child: const Text('Ok'),
-                                                onPressed: () =>
-                                                    Navigator.of(context).pop())
-                                          ]));
+                            if (msg != null) {
+                              if (msg['status']) {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                            title: const Text('Success!'),
+                                            content: Text(msg['message']),
+                                            actions: [
+                                              TextButton(
+                                                  child: const Text('Ok'),
+                                                  onPressed: () =>
+                                                      Navigator.of(context)
+                                                          .pop())
+                                            ]));
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                            title: const Text('Failed!'),
+                                            content: Text(msg['message']),
+                                            actions: [
+                                              TextButton(
+                                                  child: const Text('Ok'),
+                                                  onPressed: () =>
+                                                      Navigator.of(context)
+                                                          .pop())
+                                            ]));
+                              }
                             }
                           }
                         },
