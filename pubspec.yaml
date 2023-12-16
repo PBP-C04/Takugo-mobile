@@ -44,6 +44,8 @@ dependencies:
     path: journal
   review:
     path: review
+  donate:
+    path: donate
 
 dev_dependencies:
   flutter_test:

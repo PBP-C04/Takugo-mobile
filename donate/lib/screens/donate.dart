@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:donate/widgets/donate_card.dart';
+import 'package:donate/models/book_donate.dart';
+import 'package:donate/screens/donate_form.dart';
 // import 'package:tukatuku/widgets/left_drawer.dart';
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? key}) : super(key: key);
+class DonatePage extends StatelessWidget {
+  DonatePage({Key? key}) : super(key: key);
 
   final List<Item> items = [
     Item("Lihat Donasi", Icons.checklist, Colors.blueAccent),
@@ -16,10 +18,10 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "TukaTuku",
+          "Donate",
         ),
-        backgroundColor: Colors.indigo,
-        foregroundColor: Colors.white,
+        backgroundColor: Colors.yellow[700],
+        foregroundColor: Colors.black87,
         actions: [
           IconButton(
             icon: Icon(Icons.arrow_back),
@@ -38,7 +40,7 @@ class MyHomePage extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: Text(
-                  'Takugo',
+                  'Donasikan Bukumu!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
@@ -46,17 +48,38 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              GridView.count(
-                primary: true,
-                padding: const EdgeInsets.all(20),
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 3,
-                shrinkWrap: true,
-                children: items.map((Item item) {
-                  return ShopCard(item);
-                }).toList(),
-              ),
+              const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                  child: SizedBox(
+                      height: 40,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () async {                    // Navigate to ReviewHomePage
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => DonateFormPage()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.yellow[700],
+                            foregroundColor: Colors.black87),
+                        child: const Text('Donasi Buku',
+                            style: TextStyle(fontSize: 16)),
+                      )),
+                ),
+                
+              // GridView.count(
+              //   primary: true,
+              //   padding: const EdgeInsets.all(20),
+              //   crossAxisSpacing: 10,
+              //   mainAxisSpacing: 10,
+              //   crossAxisCount: 3,
+              //   shrinkWrap: true,
+              //   children: items.map((Item item) {
+              //     return ShopCard(item);
+              //   }).toList(),
+              // ),
             ],
           ),
         ),
