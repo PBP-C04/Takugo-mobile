@@ -1,5 +1,10 @@
 # Takugo (Otaku on the Go)
 
+[![Dev](https://github.com/PBP-C04/Takugo-mobile/actions/workflows/dev.yml/badge.svg)](https://github.com/PBP-C04/Takugo-mobile/actions/workflows/dev.yml)
+[![Pre-Release](https://github.com/PBP-C04/Takugo-mobile/actions/workflows/pre-release.yml/badge.svg)](https://github.com/PBP-C04/Takugo-mobile/actions/workflows/pre-release.yml)
+[![Release](https://github.com/PBP-C04/Takugo-mobile/actions/workflows/release.yml/badge.svg)](https://github.com/PBP-C04/Takugo-mobile/actions/workflows/release.yml)
+[![MS App Center Build](https://build.appcenter.ms/v0.1/apps/89a2bc6d-6246-4d4a-a552-f2e8360bd4ec/branches/main/badge)](https://appcenter.ms)
+
 - [Anggota](#-anggota-kelompok-c04-)
 - [Pembagian Tugas](#-pembagian-tugas-modul-)
 - [Latar Belakang](#-latar-belakang-takugo-)
