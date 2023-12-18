@@ -93,6 +93,7 @@ class _ReviewFormState extends State<ReviewForm> {
 
                     if (response['status'] == 'success') {
                       ScaffoldMessenger.of(context).showSnackBar(
+<<<<<<< HEAD
                         const SnackBar(
                           content: Text("Review added successfully!"),
                         ),
@@ -108,6 +109,9 @@ class _ReviewFormState extends State<ReviewForm> {
                         const SnackBar(
                           content: Text("Error, please try again."),
                         ),
+=======
+                        const SnackBar(content: Text('Processing Data')),
+>>>>>>> origin/qonita
                       );
                     }
                   }
