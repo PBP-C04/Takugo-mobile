@@ -104,6 +104,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  journal:
+    dependency: "direct main"
+    description:
+      path: "../journal"
+      relative: true
+    source: path
+    version: "0.0.1"
   lints:
     dependency: transitive
     description:
@@ -208,6 +215,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.1"
+  review:
+    dependency: "direct main"
+    description:
+      path: "../review"
+      relative: true
+    source: path
+    version: "0.0.1"
   shared_preferences:
     dependency: transitive
     description:
@@ -301,6 +315,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  takugo:
+    dependency: "direct main"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.0+2"
   term_glyph:
     dependency: transitive
     description:
