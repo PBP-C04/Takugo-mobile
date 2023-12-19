@@ -1,6 +1,5 @@
 export 'package:connectivity_plus/connectivity_plus.dart';
 export 'package:forum/core/constants/constants.dart';
-export 'package:forum/core/errors/exceptions.dart';
 export 'package:forum/core/network/network_info.dart';
 export 'package:forum/core/utils/image_constant.dart';
 export 'package:forum/core/utils/logger.dart';

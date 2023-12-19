@@ -1,50 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'core/app_export.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'views/login_page.dart';
+import 'views/home.dart';
 
-var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  Future.wait([
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]),
-    PrefUtils().init()
-  ]).then((value) {
-    runApp(MyApp());
-  });
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: Consumer<ThemeProvider>(
-        builder: (context, provider, child) {
-          return MaterialApp(
-            theme: theme,
-            title: 'forum',
-            navigatorKey: NavigatorService.navigatorKey,
-            debugShowCheckedModeBanner: false,
-            localizationsDelegates: [
-              AppLocalizationDelegate(),
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: [
-              Locale(
-                'en',
-                '',
-              ),
-            ],
-            initialRoute: AppRoutes.initialRoute,
-            routes: AppRoutes.routes,
-          );
-        },
-      ),
+    final box = GetStorage();
+    final token = box.read('token');
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Forum App',
+      home: token == null ? const LoginPage() : const HomePage(),
     );
   }
 }
