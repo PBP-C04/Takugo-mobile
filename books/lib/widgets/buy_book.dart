@@ -5,10 +5,18 @@ import 'package:books/models/book.dart';
 
 Future<Map<String, dynamic>> buyBook(
     CookieRequest request, String amount, Book book) async {
-  final resp = await request.post(
-      'https://takugo-c04-tk.pbp.cs.ui.ac.id/books/buy-book-flutter/${book.pk}/',
-      {'amount': amount});
-
+  Map<String, dynamic> resp;
+  try {
+    resp = await request.post(
+        'https://takugo-c04-tk.pbp.cs.ui.ac.id/books/buy-book-flutter/${book
+            .pk}/',
+        {'amount': amount});
+  } catch (e) {
+    resp = {
+      'status': false,
+      'message': 'Unknown Error'
+    };
+  }
   return resp;
 }
 
