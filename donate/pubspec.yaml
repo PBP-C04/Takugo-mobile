@@ -1,8 +1,7 @@
-name: books
+name: donate
 description: A new Flutter package project.
 version: 0.0.1
 homepage:
-publish_to: none
 
 environment:
   sdk: '>=3.1.5 <4.0.0'
@@ -11,16 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^1.1.0
   pbp_django_auth: ^0.4.0
   provider: ^6.1.1
-  journal:
-    path: ../journal
-  takugo:
-    path: ../
-  review:
-    path: ../review
-  forum:
-    path: ../forum
 
 dev_dependencies:
   flutter_test:

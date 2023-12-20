@@ -46,7 +46,6 @@ class LeftDrawer extends StatelessWidget {
               ],
             ),
           ),
-          // TODO: Bagian routing
           ListTile(
             title: const Text('Home'),
             leading: const Icon(Icons.home),
@@ -57,31 +56,6 @@ class LeftDrawer extends StatelessWidget {
             leading: const Icon(Icons.book),
             onTap: () => navigateToPage(context, const ViewBooksPage()),
           ),
-          // ListTile(
-          //   title: const Text('Review Books'),
-          // Bagian redirection ke ShopFormPage
-          // onTap: () {
-          //     /*
-          //     TODO: Buatlah routing ke ShopFormPage di sini,
-          //     setelah halaman ShopFormPage sudah dibuat.
-          //     */
-          //     Navigator.pushReplacement(
-          //         context,
-          //         MaterialPageRoute(
-          //             builder: (context) => ShopFormPage(),
-          //         ));
-          // },
-          // ),
-          // ListTile(
-          //   title: const Text('Book Journal'),
-          // onTap: () {
-          //     // Route menu ke halaman item
-          //     Navigator.push(
-          //     context,
-          //     MaterialPageRoute(builder: (context) => const ItemPage()),
-          //     );
-          // },
-          // ),
           ListTile(
               title: const Text('Donate Book'),
               leading: const Icon(Icons.favorite),
