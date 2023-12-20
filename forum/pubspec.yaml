@@ -8,6 +8,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  bouncing_widget: ^2.0.0
   cached_network_image: ^3.3.0
   connectivity_plus: ^5.0.2
   flutter:

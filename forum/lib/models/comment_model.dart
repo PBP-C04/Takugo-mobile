@@ -1,130 +1,72 @@
 // To parse this JSON data, do
 //
-//     final commentModel = commentModelFromJson(jsonString);
+//     final CommentModel = CommentModelFromJson(jsonString);
 
 import 'dart:convert';
 
-CommentModel commentModelFromJson(String str) =>
-    CommentModel.fromJson(json.decode(str));
+CommentModel CommentModelFromJson(String str) => CommentModel.fromJson(json.decode(str));
 
-String commentModelToJson(CommentModel data) => json.encode(data.toJson());
+String CommentModelToJson(CommentModel data) => json.encode(data.toJson());
 
 class CommentModel {
-  CommentModel({
-    this.id,
-    this.userId,
-    this.feedId,
-    this.body,
-    this.createdAt,
-    this.updatedAt,
-    this.feed,
-    this.user,
-  });
+  Model model;
+  int pk;
+  Fields fields;
 
-  int? id;
-  int? userId;
-  int? feedId;
-  String? body;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  Feed? feed;
-  User? user;
+  CommentModel({
+    required this.model,
+    required this.pk,
+    required this.fields,
+  });
 
   factory CommentModel.fromJson(Map<String, dynamic> json) => CommentModel(
-        id: json["id"],
-        userId: json["user_id"],
-        feedId: json["feed_id"],
-        body: json["body"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        feed: Feed.fromJson(json["feed"]),
-        user: User.fromJson(json["user"]),
+        model: modelValues.map[json["model"]]!,
+        pk: json["pk"],
+        fields: Fields.fromJson(json["fields"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "user_id": userId,
-        "feed_id": feedId,
-        "body": body,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
-        "feed": feed!.toJson(),
-        "user": user!.toJson(),
+        "model": modelValues.reverse[model],
+        "pk": pk,
+        "fields": fields.toJson(),
       };
 }
+class Fields {
+  int author;
+  String content;
+  String date;
 
-class Feed {
-  Feed({
-    this.id,
-    this.userId,
-    this.content,
-    this.createdAt,
-    this.updatedAt,
-    this.liked,
+  Fields({
+    required this.author,
+    required this.content,
+    required this.date,
   });
 
-  int? id;
-  int? userId;
-  String? content;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  bool? liked;
-
-  factory Feed.fromJson(Map<String, dynamic> json) => Feed(
-        id: json["id"],
-        userId: json["user_id"],
+  factory Fields.fromJson(Map<String, dynamic> json) => Fields(
+        author: json["author"],
         content: json["content"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        liked: json["liked"],
+        date: json["date"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "user_id": userId,
+        "author": author,
         "content": content,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
-        "liked": liked,
+        "date": date,
       };
 }
 
-class User {
-  User({
-    this.id,
-    this.name,
-    this.username,
-    this.email,
-    this.emailVerifiedAt,
-    this.createdAt,
-    this.updatedAt,
-  });
+enum Model { REPLY }
 
-  int? id;
-  String? name;
-  String? username;
-  String? email;
-  dynamic? emailVerifiedAt;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+final modelValues = EnumValues({"forum.reply": Model.REPLY});
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"],
-        name: json["name"],
-        username: json["username"],
-        email: json["email"],
-        emailVerifiedAt: json["email_verified_at"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-      );
+class EnumValues<T> {
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "username": username,
-        "email": email,
-        "email_verified_at": emailVerifiedAt,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
-      };
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
+  }
 }
