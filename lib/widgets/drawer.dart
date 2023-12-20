@@ -1,4 +1,5 @@
 import 'package:books/screens/view_books.dart';
+import 'package:forum/screens/forum_page.dart';
 import 'package:flutter/material.dart';
 import 'package:takugo/home/home.dart';
 import 'package:takugo/home/login.dart';
@@ -72,7 +73,7 @@ class LeftDrawer extends StatelessWidget {
                 if (!request.loggedIn) {
                   navigateToPage(context, const LoginPage());
                 } else {
-                  navigateToPage(context, const Placeholder());
+                  navigateToPage(context, const ForumPage());
                 }
               }),
           request.loggedIn

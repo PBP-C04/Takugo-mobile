@@ -15,8 +15,12 @@ dependencies:
   provider: ^6.1.1
   journal:
     path: ../journal
+  takugo:
+    path: ../
   review:
     path: ../review
+  forum:
+    path: ../forum
 
 dev_dependencies:
   flutter_test:
