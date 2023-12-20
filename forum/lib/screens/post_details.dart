@@ -23,7 +23,7 @@ class _PostDetailsState extends State<PostDetails> {
 
   Future<List<CommentModel>> fetchComment(CookieRequest request) async {
     final response =
-        await request.get("$urlLokal/forum/reply_json/${widget.post.pk}/");
+        await request.get("$url/forum/reply_json/${widget.post.pk}/");
     if (response['status']) {
       final data = jsonDecode(response['reply']);
       List<CommentModel> items = [];
@@ -113,7 +113,8 @@ class _PostDetailsState extends State<PostDetails> {
                               onPressed: () async {
                                 if (_formKey.currentState?.validate() ?? true) {
                                   final response = await request.postJson(
-                                      "http://127.0.0.1:8000/forum/create_reply_flutter/${widget.post.pk}/",
+                                      'https://takugo-c04-tk.pbp.cs.ui.ac.id/forum/create_reply_flutter/${widget.post.pk}/',
+                                      // "http://127.0.0.1:8000/forum/create_reply_flutter/${widget.post.pk}/",
                                       jsonEncode(<String, String>{
                                         'content': _comment,
                                       }));

@@ -19,7 +19,7 @@ class ForumPage extends StatefulWidget {
 
 class _ForumPageState extends State<ForumPage> {
   Future<List<PostModel>> fetchPost(CookieRequest request) async {
-    final response = await request.get("$urlLokal/forum/post_json/");
+    final response = await request.get("$url/forum/post_json/");
     // print(response);
     if (response['status']) {
       final data = jsonDecode(response['post']);

@@ -5,12 +5,6 @@ import 'dart:convert';
 import 'package:forum/screens/forum_page.dart';
 
 class ForumForm extends StatefulWidget {
-  // final PostModel post;
-  // final int pk;
-  // final String content;
-  // final String title;
-
-  // const ForumForm({Key? key, required this.id, required this.title, required this.post, required this.content}) : super(key: key);
   @override
   State<ForumForm> createState() => _ForumFormState();
 }
@@ -108,7 +102,8 @@ class _ForumFormState extends State<ForumForm> {
                     // Kirim ke Django dan tunggu respons
                     // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                     final response = await request.postJson(
-                        "http://127.0.0.1:8000/forum/create_post_flutter/",
+                      'https://takugo-c04-tk.pbp.cs.ui.ac.id/forum/create_post_flutter/',
+                        // "http://127.0.0.1:8000/forum/create_post_flutter/",
                         jsonEncode(<String, String>{
                           'title': _title,
                           'content': _content,

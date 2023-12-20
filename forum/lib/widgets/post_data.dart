@@ -29,7 +29,7 @@ class _PostDataState extends State<PostData> {
     }
     return Card(
       margin: EdgeInsets.symmetric(
-          vertical: 8, horizontal: 16), // Adjusted margin for spacing
+          vertical: 8, horizontal: 16),
       color: Colors.yellow[700],
       child: ListTile(
         title: Text(
