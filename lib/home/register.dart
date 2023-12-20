@@ -42,8 +42,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final String url = 'http://10.0.2.2:8000/auth/register/';
-  String userType = '';
+  final String url = 'https://takugo-c04-tk.pbp.cs.ui.ac.id/auth/register/';
+  String userType = UserType.none.value;
 
   @override
   Widget build(BuildContext context) {
@@ -146,30 +146,32 @@ class _RegisterPageState extends State<RegisterPage> {
                       'user_type': userType,
                     });
 
-                    if (response['status']) {
-                      String msg = response['message'];
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const LoginPage()));
-                      ScaffoldMessenger.of(context)
-                        ..hideCurrentSnackBar()
-                        ..showSnackBar(SnackBar(
-                          content: Text(msg),
-                        ));
-                    } else {
-                      showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                                title: const Text('Register Failed'),
-                                content: Text(response['msg']),
-                                actions: [
-                                  TextButton(
-                                    child: const Text('OK'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  )
-                                ],
-                              ));
+                    if (context.mounted) {
+                      if (response['status']) {
+                        String msg = response['message'];
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => const LoginPage()));
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(SnackBar(
+                            content: Text(msg),
+                          ));
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: const Text('Register Failed'),
+                                  content: Text(response['msg']),
+                                  actions: [
+                                    TextButton(
+                                      child: const Text('OK'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    )
+                                  ],
+                                ));
+                      }
                     }
                   },
                   style: ElevatedButton.styleFrom(
