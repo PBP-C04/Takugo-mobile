@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:forumapp/controllers/post_controller.dart';
-import 'package:forumapp/models/post_model.dart';
-import 'package:forumapp/views/post_details.dart';
+import 'package:forum/controllers/post_controller.dart';
+import 'package:forum/models/post_model.dart';
+import 'package:forum/views/post_details.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 

@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  get: ^4.6.6
 
 dependency_overrides:
   intl: any

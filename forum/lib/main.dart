@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Forum App',
-      home: token == null ? const LoginPage() : const HomePage(),
+      home: token == null ? const LoginPage() : const ForumPage(),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PostFIeld extends StatelessWidget {
-  const PostFIeld({
+class PostField extends StatelessWidget {
+  const PostField({
     super.key,
     required this.hintText,
     required this.controller,

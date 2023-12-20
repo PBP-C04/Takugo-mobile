@@ -4,14 +4,14 @@ import 'widgets/post_field.dart';
 import 'widgets/post_data.dart';
 import 'package:forum/controllers/post_controller.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class ForumPage extends StatefulWidget {
+  const ForumPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ForumPage> createState() => _ForumPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ForumPageState extends State<ForumPage> {
   final PostController _postController = Get.put(PostController());
   final TextEditingController _textController = TextEditingController();
 
@@ -24,23 +24,20 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: RefreshIndicator(
-            onRefresh: () async {
-              await _postController.getAllPosts();
-            },
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await _postController.getAllPosts();
+        },
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                PostFIeld(
+                PostField(
                   hintText: 'What do you want to ask?',
                   controller: _textController,
                 ),
-                // const SizedBox(
-                //   height: ,
-                // ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
@@ -63,13 +60,9 @@ class _HomePageState extends State<HomePage> {
                         : Text('Post');
                   }),
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 30),
                 Text('Posts'),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 Obx(() {
                   return _postController.isLoading.value
                       ? const Center(

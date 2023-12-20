@@ -6,7 +6,7 @@ import 'widgets/post_data.dart';
 import 'package:forum/controllers/post_controller.dart';
 
 class PostDetails extends StatefulWidget {
-  const PostDetails({super.key, required this.post});
+  const PostDetails({Key? key, required this.post}) : super(key: key);
 
   final PostModel post;
 
@@ -20,10 +20,10 @@ class _PostDetailsState extends State<PostDetails> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       _postController.getComments(widget.post.id);
     });
-    super.initState();
   }
 
   @override
@@ -33,7 +33,7 @@ class _PostDetailsState extends State<PostDetails> {
         backgroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
-        title: Text(widget.post.user!.name!),
+        title: Text(widget.post.user?.name ?? 'Unknown User'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -61,10 +61,12 @@ class _PostDetailsState extends State<PostDetails> {
                             return ListTile(
                               title: Text(
                                 _postController
-                                    .comments.value[index].user!.name!,
+                                        .comments.value[index].user?.name ??
+                                    'Unknown User',
                               ),
                               subtitle: Text(
-                                _postController.comments.value[index].body!,
+                                _postController.comments.value[index].body ??
+                                    'No comment body',
                               ),
                             );
                           });
@@ -92,7 +94,7 @@ class _PostDetailsState extends State<PostDetails> {
                   _commentController.clear();
                   _postController.getComments(widget.post.id);
                 },
-                child: const Text('Comment'),
+                child: Text('Comment'),
               ),
             ],
           ),
