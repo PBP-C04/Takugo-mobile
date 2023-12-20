@@ -6,6 +6,7 @@ import 'package:takugo/widgets/feature_container.dart';
 import 'package:takugo/home/login.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:donate/screens/donate.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
@@ -67,7 +68,7 @@ class MyHomePage extends StatelessWidget {
                     icon: Icons.favorite,
                     onTap: () {
                       if (!request.loggedIn) {
-                        navigateToPage(context, const LoginPage());
+                        navigateToPage(context, DonatePage());
                       } else {
                         navigateToPage(context, const Placeholder());
                       }
