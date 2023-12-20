@@ -9,81 +9,68 @@ PostModel postModelFromJson(String str) => PostModel.fromJson(json.decode(str));
 String postModelToJson(PostModel data) => json.encode(data.toJson());
 
 class PostModel {
+  Model model;
+  int pk;
+  Fields fields;
+
   PostModel({
-    this.id,
-    this.userId,
-    this.content,
-    this.createdAt,
-    this.updatedAt,
-    this.liked,
-    this.user,
+    required this.model,
+    required this.pk,
+    required this.fields,
   });
 
-  int? id;
-  int? userId;
-  String? content;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  bool? liked;
-  User? user;
-
   factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(
-        id: json["id"],
-        userId: json["user_id"],
-        content: json["content"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        liked: json["liked"],
-        user: User.fromJson(json["user"]),
+        model: modelValues.map[json["model"]]!,
+        pk: json["pk"],
+        fields: Fields.fromJson(json["fields"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "user_id": userId,
+        "model": modelValues.reverse[model],
+        "pk": pk,
+        "fields": fields.toJson(),
+      };
+}
+class Fields {
+  String title;
+  int author;
+  String content;
+  String date;
+
+  Fields({
+    required this.title,
+    required this.author,
+    required this.content,
+    required this.date,
+  });
+
+  factory Fields.fromJson(Map<String, dynamic> json) => Fields(
+        title: json["title"],
+        author: json["author"],
+        content: json["content"],
+        date: json["date"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "title": title,
+        "author": author,
         "content": content,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
-        "liked": liked,
-        "user": user!.toJson(),
+        "date": date,
       };
 }
 
-class User {
-  User({
-    this.id,
-    this.name,
-    this.username,
-    this.email,
-    this.emailVerifiedAt,
-    this.createdAt,
-    this.updatedAt,
-  });
+enum Model { FORUM }
 
-  int? id;
-  String? name;
-  String? username;
-  String? email;
-  dynamic? emailVerifiedAt;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+final modelValues = EnumValues({"forum.post": Model.FORUM});
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"],
-        name: json["name"],
-        username: json["username"],
-        email: json["email"],
-        emailVerifiedAt: json["email_verified_at"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-      );
+class EnumValues<T> {
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "username": username,
-        "email": email,
-        "email_verified_at": emailVerifiedAt,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
-      };
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
+  }
 }

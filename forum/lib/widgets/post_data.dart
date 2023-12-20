@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forum/controllers/post_controller.dart';
 import 'package:forum/models/post_model.dart';
-import 'package:forum/views/post_details.dart';
+import 'package:forum/screens/post_details.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,40 +27,27 @@ class _PostDataState extends State<PostData> {
       padding: EdgeInsets.all(10),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.grey[200],
+        color: Colors.yellow[700],
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            widget.post.user!.name!,
+            widget.post.fields.author.toString(),
             style: GoogleFonts.poppins(),
-          ),
-          Text(
-            widget.post.user!.email!,
-            style: GoogleFonts.poppins(
-              fontSize: 10,
-            ),
           ),
           const SizedBox(
             height: 10,
           ),
           Text(
-            widget.post.content!,
+            widget.post.fields.content,
+            style: TextStyle(
+              color:  Colors.black87,
+            ),
           ),
           Row(
             children: [
-              IconButton(
-                onPressed: () async {
-                  await _postController.likeAndDislike(widget.post.id);
-                  _postController.getAllPosts();
-                },
-                icon: Icon(
-                  Icons.thumb_up,
-                  color: widget.post.liked! ? Colors.blue : Colors.black,
-                ),
-              ),
               IconButton(
                 onPressed: () {
                   Get.to(

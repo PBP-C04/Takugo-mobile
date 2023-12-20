@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:review/screens/review_home.dart';
+import 'package:forum/screens/forum_page.dart';
 import 'package:books/screens/view_books.dart';
 import 'package:takugo/widgets/drawer.dart';
 import 'package:takugo/widgets/feature_container.dart';
@@ -80,7 +81,7 @@ class MyHomePage extends StatelessWidget {
                       if (!request.loggedIn) {
                         navigateToPage(context, const LoginPage());
                       } else {
-                        navigateToPage(context, const Placeholder());
+                        navigateToPage(context, const ForumPage());
                       }
                     }, // nanti diganti navigate sesuai modul
                   ),

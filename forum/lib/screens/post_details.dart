@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:forum/models/post_model.dart';
-import 'package:forum/views/widgets/input_widget.dart';
+import 'package:forum/widgets/input_widget.dart';
 import 'package:get/get.dart';
-import 'widgets/post_data.dart';
+import '../widgets/post_data.dart';
 import 'package:forum/controllers/post_controller.dart';
 
 class PostDetails extends StatefulWidget {
@@ -22,7 +22,7 @@ class _PostDetailsState extends State<PostDetails> {
   void initState() {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) {
-      _postController.getComments(widget.post.id);
+      _postController.getComments(widget.post.pk);
     });
   }
 
@@ -33,7 +33,7 @@ class _PostDetailsState extends State<PostDetails> {
         backgroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
-        title: Text(widget.post.user?.name ?? 'Unknown User'),
+        title: Text(widget.post.fields.author.toString()),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -88,11 +88,11 @@ class _PostDetailsState extends State<PostDetails> {
                 ),
                 onPressed: () async {
                   await _postController.createComment(
-                    widget.post.id,
+                    widget.post.pk,
                     _commentController.text.trim(),
                   );
                   _commentController.clear();
-                  _postController.getComments(widget.post.id);
+                  _postController.getComments(widget.post.pk);
                 },
                 child: Text('Comment'),
               ),

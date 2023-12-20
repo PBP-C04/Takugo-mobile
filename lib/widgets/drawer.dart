@@ -1,5 +1,5 @@
 import 'package:books/screens/view_books.dart';
-import 'package:forum/views/home.dart';
+import 'package:forum/screens/forum_page.dart';
 import 'package:flutter/material.dart';
 import 'package:takugo/home/home.dart';
 import 'package:takugo/home/login.dart';
